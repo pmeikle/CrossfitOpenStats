@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PolicyDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="PolicyId" />
+          </Key>
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PolicyEffectiveDate" Type="date" Nullable="false" />
+          <Property Name="PolicyExpirationDate" Type="date" Nullable="false" />
+          <Property Name="PrimaryInsuredName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrimaryInsuredMailingAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrimaryInsuredCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PrimaryInsuredStateId" Type="int" Nullable="false" />
+          <Property Name="PrimaryInsuredZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="RiskConstructionId" Type="int" Nullable="false" />
+          <Property Name="RiskYearBuilt" Type="int" Nullable="false" />
+          <Property Name="RiskAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RiskCity" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RiskStateId" Type="int" Nullable="false" />
+          <Property Name="RiskZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PolicyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RiskConstruction">
+          <Key>
+            <PropertyRef Name="RiskConstructionId" />
+          </Key>
+          <Property Name="RiskConstructionId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="stateID" />
+          </Key>
+          <Property Name="stateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="stateCode" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="stateName" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Policy__PrimaryI__4BAC3F29">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="stateID" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="PrimaryInsuredStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Policy__RiskCons__49C3F6B7">
+          <End Role="RiskConstruction" Type="Self.RiskConstruction" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RiskConstruction">
+              <PropertyRef Name="RiskConstructionId" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="RiskConstructionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Policy__RiskStat__4AB81AF0">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="stateID" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="RiskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PolicyDBModelStoreContainer">
+          <EntitySet Name="Policy" EntityType="Self.Policy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RiskConstruction" EntityType="Self.RiskConstruction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Policy__PrimaryI__4BAC3F29" Association="Self.FK__Policy__PrimaryI__4BAC3F29">
+            <End Role="State" EntitySet="State" />
+            <End Role="Policy" EntitySet="Policy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Policy__RiskCons__49C3F6B7" Association="Self.FK__Policy__RiskCons__49C3F6B7">
+            <End Role="RiskConstruction" EntitySet="RiskConstruction" />
+            <End Role="Policy" EntitySet="Policy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Policy__RiskStat__4AB81AF0" Association="Self.FK__Policy__RiskStat__4AB81AF0">
+            <End Role="State" EntitySet="State" />
+            <End Role="Policy" EntitySet="Policy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PolicyDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Policy">
+          <Key>
+            <PropertyRef Name="PolicyId" />
+          </Key>
+          <Property Name="PolicyNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PolicyEffectiveDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PolicyExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PrimaryInsuredName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrimaryInsuredMailingAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrimaryInsuredCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PrimaryInsuredStateId" Type="Int32" Nullable="false" />
+          <Property Name="PrimaryInsuredZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RiskConstructionId" Type="Int32" Nullable="false" />
+          <Property Name="RiskYearBuilt" Type="Int32" Nullable="false" />
+          <Property Name="RiskAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RiskCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RiskStateId" Type="Int32" Nullable="false" />
+          <Property Name="RiskZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PrimaryInsuredState" Relationship="Self.FK__Policy__PrimaryI__34C8D9D1" FromRole="Policy" ToRole="State" />
+          <NavigationProperty Name="RiskConstruction" Relationship="Self.FK__Policy__RiskCons__32E0915F" FromRole="Policy" ToRole="RiskConstruction" />
+          <NavigationProperty Name="RiskState" Relationship="Self.FK__Policy__RiskStat__33D4B598" FromRole="Policy" ToRole="State" />
+          <Property Name="PolicyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="RiskConstruction">
+          <Key>
+            <PropertyRef Name="RiskConstructionId" />
+          </Key>
+          <Property Name="RiskConstructionId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="stateID" />
+          </Key>
+          <Property Name="stateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="stateCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="stateName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Policy__PrimaryI__34C8D9D1">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="stateID" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="PrimaryInsuredStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Policy__RiskCons__32E0915F">
+          <End Role="RiskConstruction" Type="Self.RiskConstruction" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RiskConstruction">
+              <PropertyRef Name="RiskConstructionId" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="RiskConstructionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Policy__RiskStat__33D4B598">
+          <End Role="State" Type="Self.State" Multiplicity="1" />
+          <End Role="Policy" Type="Self.Policy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="stateID" />
+            </Principal>
+            <Dependent Role="Policy">
+              <PropertyRef Name="RiskStateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PolicyDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Policies" EntityType="Self.Policy" />
+          <EntitySet Name="RiskConstructions" EntityType="Self.RiskConstruction" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <AssociationSet Name="FK__Policy__PrimaryI__34C8D9D1" Association="Self.FK__Policy__PrimaryI__34C8D9D1">
+            <End Role="State" EntitySet="States" />
+            <End Role="Policy" EntitySet="Policies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Policy__RiskCons__32E0915F" Association="Self.FK__Policy__RiskCons__32E0915F">
+            <End Role="RiskConstruction" EntitySet="RiskConstructions" />
+            <End Role="Policy" EntitySet="Policies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Policy__RiskStat__33D4B598" Association="Self.FK__Policy__RiskStat__33D4B598">
+            <End Role="State" EntitySet="States" />
+            <End Role="Policy" EntitySet="Policies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PolicyDBModelStoreContainer" CdmEntityContainer="PolicyDBEntities">
+          <EntitySetMapping Name="Policies">
+            <EntityTypeMapping TypeName="PolicyDBModel.Policy">
+              <MappingFragment StoreEntitySet="Policy">
+                <ScalarProperty Name="PolicyId" ColumnName="PolicyId" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PolicyEffectiveDate" ColumnName="PolicyEffectiveDate" />
+                <ScalarProperty Name="PolicyExpirationDate" ColumnName="PolicyExpirationDate" />
+                <ScalarProperty Name="PrimaryInsuredName" ColumnName="PrimaryInsuredName" />
+                <ScalarProperty Name="PrimaryInsuredMailingAddress" ColumnName="PrimaryInsuredMailingAddress" />
+                <ScalarProperty Name="PrimaryInsuredCity" ColumnName="PrimaryInsuredCity" />
+                <ScalarProperty Name="PrimaryInsuredStateId" ColumnName="PrimaryInsuredStateId" />
+                <ScalarProperty Name="PrimaryInsuredZipCode" ColumnName="PrimaryInsuredZipCode" />
+                <ScalarProperty Name="RiskConstructionId" ColumnName="RiskConstructionId" />
+                <ScalarProperty Name="RiskYearBuilt" ColumnName="RiskYearBuilt" />
+                <ScalarProperty Name="RiskAddress" ColumnName="RiskAddress" />
+                <ScalarProperty Name="RiskCity" ColumnName="RiskCity" />
+                <ScalarProperty Name="RiskStateId" ColumnName="RiskStateId" />
+                <ScalarProperty Name="RiskZipCode" ColumnName="RiskZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RiskConstructions">
+            <EntityTypeMapping TypeName="PolicyDBModel.RiskConstruction">
+              <MappingFragment StoreEntitySet="RiskConstruction">
+                <ScalarProperty Name="RiskConstructionId" ColumnName="RiskConstructionId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="PolicyDBModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="stateID" ColumnName="stateID" />
+                <ScalarProperty Name="stateCode" ColumnName="stateCode" />
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

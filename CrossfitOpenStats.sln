@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossfitOpenStats", "CrossfitOpenStats\CrossfitOpenStats.csproj", "{5478745A-DE2D-4B1D-A156-1B83C89671B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5478745A-DE2D-4B1D-A156-1B83C89671B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5478745A-DE2D-4B1D-A156-1B83C89671B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5478745A-DE2D-4B1D-A156-1B83C89671B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5478745A-DE2D-4B1D-A156-1B83C89671B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F4B6A4D-1EE4-4521-ABAF-3BB98408D1CA}
+	EndGlobalSection
+EndGlobal

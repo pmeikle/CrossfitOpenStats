@@ -1,0 +1,125 @@
+﻿<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        Policy Management
+    </div>
+    <div class='panel-body'>
+        <div class='table-responsive'>
+            <div style="padding-bottom:10px"><button class="btn btn-primary" (click)="addPolicy()">Add</button></div>
+            <div class="alert alert-info" role="alert" *ngIf="indLoading"><img src="../../images/loading.gif" width="32" height="32" /> Loading...</div>
+            <div *ngIf='users && policies.length==0' class="alert alert-info" role="alert">No record found!</div>
+            <table class='table table-striped' *ngIf='policies && policies.length'>
+                <thead>
+                    <tr>
+                        <th>Policy Number</th>
+                        <th>Insured Name</th>
+                        <th>Effective Date</th>
+                        <th>Expiration Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let aPolicy of policies">
+                        <td>{{aPolicy.PolicyNumber}}</td>
+                        <td>{{aPolicy.PrimaryInsuredName}}</td>
+                        <td>{{aPolicy.PolicyEffectiveDate | date: 'MM/dd/yyyy'}}</td>
+                        <td>{{aPolicy.PolicyExpirationDate | date: 'MM/dd/yyyy'}}</td>
+                        <td>
+                            <button title="Edit" class="btn btn-primary" (click)="editPolicy(aPolicy.PolicyId)">Edit</button>
+                            <button title="Delete" class="btn btn-danger" (click)="deletePolicy(aPolicy.PolicyId)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+            </div>
+        </div>
+        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+        </div>
+    </div>
+</div>
+
+<modal #modal>
+    <form novalidate (ngSubmit)="onSubmit(policyForm)" [formGroup]="policyForm">
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">{{modalTitle}}</h4>
+        </modal-header>
+        <modal-body>
+
+            <div class="form-group">
+                <div>
+                    <span>Policy Number*</span>
+                    <input type="text" class="form-control" placeholder="XXX-XX-XXXX" formControlName="PolicyNumber">
+                </div>
+                <div>
+                    <span>Effective Date*</span>
+                    <input type="date" class="form-control" placeholder="MM/DD/YYYY" formControlName="PolicyEffectiveDate" />
+                </div>
+                <div>
+                    <span>Expiration Date*</span>
+                    <input type="date" class="form-control" placeholder="MM/DD/YYYY" formControlName="PolicyExpirationDate" />
+                </div>
+                <div>
+                    <span>Primary Insured Name*</span>
+                    <input type="text" class="form-control" placeholder="Primary Insured Name" formControlName="PrimaryInsuredName">
+                </div>
+                <div>
+                    <span>Primary Insured Mailing Address*</span>
+                    <input type="text" class="form-control" placeholder="Primary Insured Mailing Address" formControlName="PrimaryInsuredMailingAddress">
+                </div>
+                <div>
+                    <span>Primary Insured City*</span>
+                    <input type="text" class="form-control" placeholder="Primary Insured City" formControlName="PrimaryInsuredCity">
+                </div>
+                <div>
+                    <span>Primary Insured State*</span>
+                    <select formControlName="PrimaryInsuredStateId" class="form-control" required>
+                        <option *ngFor="let state of states" [value]="state.stateID">{{state.stateName}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Primary Insured Zip Code*</span>
+                    <input type="text" class="form-control" placeholder="Primary Insured Zip Code" formControlName="PrimaryInsuredZipCode">
+                </div>
+                <div>
+                    <span>Construction Type*</span>
+                    <select formControlName="RiskConstructionId" class="form-control" required>
+                        <option *ngFor="let riskConstruction of riskConstructions" [value]="riskConstruction.RiskConstructionId">{{riskConstruction.Type}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Year Built*</span>
+                    <input type="text" class="form-control" placeholder="YYYY" formControlName="RiskYearBuilt">
+                </div>
+                <div>
+                    <span>Risk Address*</span>
+                    <input type="text" class="form-control" placeholder="Risk Address" formControlName="RiskAddress">
+                </div>
+                <div>
+                    <span>Risk City*</span>
+                    <input type="text" class="form-control" placeholder="Risk City" formControlName="RiskCity">
+                </div>
+                <div>
+                    <span>Risk Insured State*</span>
+                    <select formControlName="RiskStateId" class="form-control" required>
+                        <option *ngFor="let state of states" [value]="state.stateID">{{state.stateName}}</option>
+                    </select>
+                </div>
+                <div>
+                    <span>Risk Zip Code*</span>
+                    <input type="text" class="form-control" placeholder="Risk Zip Code" formControlName="RiskZipCode">
+                </div>
+            </div>
+            <div>Fields denoted with an asterisk (*) are required.</div>
+        </modal-body>
+        <modal-footer>
+            <div>
+                <a class="btn btn-default" (click)="modal.dismiss()">Cancel</a>
+                <button type="submit" [disabled]="policyForm.invalid" class="btn btn-primary">{{modalBtnTitle}}</button>
+            </div>
+        </modal-footer>
+    </form>
+</modal>
