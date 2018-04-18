@@ -128,7 +128,8 @@ var PolicyComponent = /** @class */ (function () {
         */
     };
     PolicyComponent.prototype.handleApiResponse = function (successMessage, returnStatus) {
-        if (returnStatus == 1) {
+        if (returnStatus == 1) //Success
+         {
             this.msg = successMessage;
             this.loadPolicies();
         }

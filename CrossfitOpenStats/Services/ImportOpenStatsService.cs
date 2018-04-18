@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
+using CrossfitOpenStats.Services.JsonModels;
+using Newtonsoft.Json;
 
 namespace CrossfitOpenStats.Services
 {
@@ -24,6 +26,7 @@ namespace CrossfitOpenStats.Services
         {
             var response = await Client.GetAsync($"competitions/api/v1/competitions/open/2018/leaderboards?page={pageNum}");
             var json = response.Content.ReadAsStringAsync().Result;
+            var pageData = JsonConvert.DeserializeObject<PageData>(json);
             return json;
         }
     }

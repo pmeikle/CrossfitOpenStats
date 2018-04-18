@@ -22,6 +22,7 @@ var PolicyService = /** @class */ (function () {
     PolicyService.prototype.get = function (url) {
         return this._http.get(url)
             .map(function (response) { return response.json(); })
+            // .do(data => console.log("All: " + JSON.stringify(data)))
             .catch(this.handleError);
     };
     PolicyService.prototype.post = function (url, model) {

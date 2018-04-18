@@ -211,6 +211,14 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ImportOpenStatsService.cs" />
+    <Compile Include="Services\JsonModels\Competition.cs" />
+    <Compile Include="Services\JsonModels\Entrant.cs" />
+    <Compile Include="Services\JsonModels\LeaderboardRow.cs" />
+    <Compile Include="Services\JsonModels\Ords.cs" />
+    <Compile Include="Services\JsonModels\PageData.cs" />
+    <Compile Include="Services\JsonModels\Pagination.cs" />
+    <Compile Include="Services\JsonModels\WorkoutScore.cs" />
+    <Compile Include="Services\JsonModels\Ui.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\Components\home.component.html" />
@@ -328,7 +336,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58697</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
