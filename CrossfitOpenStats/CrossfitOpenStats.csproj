@@ -176,35 +176,26 @@
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportOpenStatsController.cs" />
-    <Compile Include="DbContext\Policy.cs">
-      <DependentUpon>PolicyDbEntities.tt</DependentUpon>
+    <Compile Include="DbContext\Competitor.cs">
+      <DependentUpon>CrossfitOpenEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\PolicyDbEntities.Context.cs">
+    <Compile Include="DbContext\CrossfitOpenEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PolicyDbEntities.Context.tt</DependentUpon>
+      <DependentUpon>CrossfitOpenEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\PolicyDbEntities.cs">
+    <Compile Include="DbContext\CrossfitOpenEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PolicyDbEntities.tt</DependentUpon>
+      <DependentUpon>CrossfitOpenEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\PolicyDbEntities.Designer.cs">
+    <Compile Include="DbContext\CrossfitOpenEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PolicyDbEntities.edmx</DependentUpon>
+      <DependentUpon>CrossfitOpenEntities.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\Repositories\Implementations\PolicyRepository.cs" />
-    <Compile Include="DbContext\Repositories\Implementations\RiskConstructionRepository.cs" />
-    <Compile Include="DbContext\Repositories\Implementations\StateRepository.cs" />
-    <Compile Include="DbContext\Repositories\Interfaces\IPolicyRepository.cs" />
-    <Compile Include="DbContext\Repositories\Interfaces\IRiskConstructionRepository.cs" />
-    <Compile Include="DbContext\Repositories\Interfaces\IStateRepository.cs" />
-    <Compile Include="DbContext\RiskConstruction.cs">
-      <DependentUpon>PolicyDbEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\State.cs">
-      <DependentUpon>PolicyDbEntities.tt</DependentUpon>
+    <Compile Include="DbContext\WorkoutScore.cs">
+      <DependentUpon>CrossfitOpenEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,21 +214,21 @@
   <ItemGroup>
     <Content Include="app\Components\home.component.html" />
     <Content Include="app\Components\policy.component.html" />
-    <Content Include="App_Data\PolicyDB.mdf" />
-    <Content Include="App_Data\PolicyDB_log.ldf">
-      <DependentUpon>PolicyDB.mdf</DependentUpon>
+    <Content Include="App_Data\CrossfitOpenRecords.mdf" />
+    <Content Include="App_Data\CrossfitOpenRecords_log.ldf">
+      <DependentUpon>CrossfitOpenRecords.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="DbContext\PolicyDbEntities.Context.tt">
+    <Content Include="DbContext\CrossfitOpenEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PolicyDbEntities.edmx</DependentUpon>
-      <LastGenOutput>PolicyDbEntities.Context.cs</LastGenOutput>
+      <DependentUpon>CrossfitOpenEntities.edmx</DependentUpon>
+      <LastGenOutput>CrossfitOpenEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DbContext\PolicyDbEntities.tt">
+    <Content Include="DbContext\CrossfitOpenEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PolicyDbEntities.edmx</DependentUpon>
-      <LastGenOutput>PolicyDbEntities.cs</LastGenOutput>
+      <DependentUpon>CrossfitOpenEntities.edmx</DependentUpon>
+      <LastGenOutput>CrossfitOpenEntities.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -251,12 +242,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="package.json" />
-    <EntityDeploy Include="DbContext\PolicyDbEntities.edmx">
+    <EntityDeploy Include="DbContext\CrossfitOpenEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PolicyDbEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>CrossfitOpenEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DbContext\PolicyDbEntities.edmx.diagram">
-      <DependentUpon>PolicyDbEntities.edmx</DependentUpon>
+    <Content Include="DbContext\CrossfitOpenEntities.edmx.diagram">
+      <DependentUpon>CrossfitOpenEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -288,6 +279,8 @@
     <Content Include="Views\ImportStats\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DbContext\Repositories\Implementations\" />
+    <Folder Include="DbContext\Repositories\Interfaces\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

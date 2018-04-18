@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CrossfitOpenRecordsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="int" Nullable="false" />
+          <Property Name="CompetitorName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+          <Property Name="PostCompStatus" Type="nchar" MaxLength="15" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" />
+          <Property Name="ProfilePicS3Key" Type="nchar" MaxLength="50" />
+          <Property Name="CountryShortCode" Type="nchar" MaxLength="10" />
+          <Property Name="RegionalCode" Type="nchar" MaxLength="10" />
+          <Property Name="RegionId" Type="nchar" MaxLength="10" />
+          <Property Name="RegionName" Type="nchar" MaxLength="30" />
+          <Property Name="DivisionId" Type="nchar" MaxLength="10" />
+          <Property Name="Profession" Type="nchar" MaxLength="10" />
+          <Property Name="AffiliateId" Type="nchar" MaxLength="10" />
+          <Property Name="AffiliateName" Type="nchar" MaxLength="50" />
+          <Property Name="Age" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Height" Type="nchar" MaxLength="20" />
+          <Property Name="Weight" Type="nchar" MaxLength="20" />
+          <Property Name="TeamCaptain" Type="nchar" MaxLength="10" />
+          <Property Name="OverallRank" Type="int" />
+          <Property Name="OverallScore" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkoutScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CompetitorId" Type="int" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
+          <Property Name="Score" Type="nchar" MaxLength="30" />
+          <Property Name="ScoreDisplay" Type="nchar" MaxLength="20" />
+          <Property Name="ScoreIdentifier" Type="nchar" MaxLength="10" />
+          <Property Name="Video" Type="nchar" MaxLength="30" />
+          <Property Name="Breakdown" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_WorkoutScore_ToCompetitor">
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="1" />
+          <End Role="WorkoutScore" Type="Self.WorkoutScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitor">
+              <PropertyRef Name="CompetitorId" />
+            </Principal>
+            <Dependent Role="WorkoutScore">
+              <PropertyRef Name="CompetitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrossfitOpenRecordsModelStoreContainer">
+          <EntitySet Name="Competitor" EntityType="Self.Competitor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutScore" EntityType="Self.WorkoutScore" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_WorkoutScore_ToCompetitor" Association="Self.FK_WorkoutScore_ToCompetitor">
+            <End Role="Competitor" EntitySet="Competitor" />
+            <End Role="WorkoutScore" EntitySet="WorkoutScore" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CrossfitOpenRecordsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Competitor">
+          <Key>
+            <PropertyRef Name="CompetitorId" />
+          </Key>
+          <Property Name="CompetitorId" Type="Int32" Nullable="false" />
+          <Property Name="CompetitorName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PostCompStatus" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ProfilePicS3Key" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CountryShortCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RegionalCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RegionId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="RegionName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DivisionId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Profession" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AffiliateId" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AffiliateName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Age" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Height" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="TeamCaptain" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="OverallRank" Type="Int32" />
+          <Property Name="OverallScore" Type="Int32" />
+          <NavigationProperty Name="WorkoutScores" Relationship="Self.FK_WorkoutScore_ToCompetitor" FromRole="Competitor" ToRole="WorkoutScore" />
+        </EntityType>
+        <EntityType Name="WorkoutScore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CompetitorId" Type="Int32" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+          <Property Name="Score" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ScoreDisplay" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ScoreIdentifier" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Video" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Breakdown" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Competitor" Relationship="Self.FK_WorkoutScore_ToCompetitor" FromRole="WorkoutScore" ToRole="Competitor" />
+        </EntityType>
+        <Association Name="FK_WorkoutScore_ToCompetitor">
+          <End Role="Competitor" Type="Self.Competitor" Multiplicity="1" />
+          <End Role="WorkoutScore" Type="Self.WorkoutScore" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competitor">
+              <PropertyRef Name="CompetitorId" />
+            </Principal>
+            <Dependent Role="WorkoutScore">
+              <PropertyRef Name="CompetitorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CrossfitOpenRecordsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Competitors" EntityType="Self.Competitor" />
+          <EntitySet Name="WorkoutScores" EntityType="Self.WorkoutScore" />
+          <AssociationSet Name="FK_WorkoutScore_ToCompetitor" Association="Self.FK_WorkoutScore_ToCompetitor">
+            <End Role="Competitor" EntitySet="Competitors" />
+            <End Role="WorkoutScore" EntitySet="WorkoutScores" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CrossfitOpenRecordsModelStoreContainer" CdmEntityContainer="CrossfitOpenRecordsEntities">
+          <EntitySetMapping Name="Competitors">
+            <EntityTypeMapping TypeName="CrossfitOpenRecordsModel.Competitor">
+              <MappingFragment StoreEntitySet="Competitor">
+                <ScalarProperty Name="CompetitorId" ColumnName="CompetitorId" />
+                <ScalarProperty Name="CompetitorName" ColumnName="CompetitorName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PostCompStatus" ColumnName="PostCompStatus" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ProfilePicS3Key" ColumnName="ProfilePicS3Key" />
+                <ScalarProperty Name="CountryShortCode" ColumnName="CountryShortCode" />
+                <ScalarProperty Name="RegionalCode" ColumnName="RegionalCode" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="AffiliateId" ColumnName="AffiliateId" />
+                <ScalarProperty Name="AffiliateName" ColumnName="AffiliateName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="TeamCaptain" ColumnName="TeamCaptain" />
+                <ScalarProperty Name="OverallRank" ColumnName="OverallRank" />
+                <ScalarProperty Name="OverallScore" ColumnName="OverallScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutScores">
+            <EntityTypeMapping TypeName="CrossfitOpenRecordsModel.WorkoutScore">
+              <MappingFragment StoreEntitySet="WorkoutScore">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompetitorId" ColumnName="CompetitorId" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="ScoreDisplay" ColumnName="ScoreDisplay" />
+                <ScalarProperty Name="ScoreIdentifier" ColumnName="ScoreIdentifier" />
+                <ScalarProperty Name="Video" ColumnName="Video" />
+                <ScalarProperty Name="Breakdown" ColumnName="Breakdown" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

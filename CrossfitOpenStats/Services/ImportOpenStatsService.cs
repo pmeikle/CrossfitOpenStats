@@ -22,12 +22,22 @@ namespace CrossfitOpenStats.Services
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/json"));
         }
 
-        public async Task<string> GetPage(int pageNum)
+        public async Task<string> Get2018OpenData()
         {
-            var response = await Client.GetAsync($"competitions/api/v1/competitions/open/2018/leaderboards?page={pageNum}");
+            var firstPage = await  GetPage(1);
+            var totalPages = firstPage.Pagination.TotalPages;
+            for(var page = 2; page < totalPages; page++)
+            {
+                
+            }
+            return "whateverforthemoment";
+        }
+
+        public async Task<PageData> GetPage(int pageNum, int year = 2018)
+        {
+            var response = await Client.GetAsync($"competitions/api/v1/competitions/open/{2018}/leaderboards?page={pageNum}");
             var json = response.Content.ReadAsStringAsync().Result;
-            var pageData = JsonConvert.DeserializeObject<PageData>(json);
-            return json;
+            return JsonConvert.DeserializeObject<PageData>(json);
         }
     }
 }

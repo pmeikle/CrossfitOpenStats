@@ -10,8 +10,6 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
-using CrossfitOpenStats.DbContext.Repositories.Implementations;
-using CrossfitOpenStats.DbContext.Repositories.Interfaces;
 
 namespace CrossfitOpenStats
 {
@@ -51,9 +49,7 @@ namespace CrossfitOpenStats
             // OPTIONAL: Enable property injection into action filters.
             builder.RegisterFilterProvider();
 
-            builder.RegisterType<PolicyRepository>().As<IPolicyRepository>();
-            builder.RegisterType<RiskConstructionRepository>().As<IRiskConstructionRepository>();
-            builder.RegisterType<StateRepository>().As<IStateRepository>();
+            //builder.RegisterType<StateRepository>().As<IStateRepository>();
 
             var container = builder.Build();
 
